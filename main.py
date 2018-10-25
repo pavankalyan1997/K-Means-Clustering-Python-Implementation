@@ -66,7 +66,7 @@ plt.show()
 
 
 #step2
-num_iter=1000
+num_iter=100
 Output=defaultdict()
 for n in range(num_iter):
     #step 2.a
@@ -97,6 +97,12 @@ ax2.set_ylabel('Income')
 ax2.set_zlabel('No of Transactions')
 plt.show()
 
+for k in range(K):
+    plt.scatter(Output[k+1][1,:],Output[k+1][2,:],marker='.')
+    plt.scatter(Centroids[:,k][1],Centroids[:,k][2],marker='x')
+plt.xlabel('Income')
+plt.ylabel('Number of transactions')
+plt.show()
 
 
 
