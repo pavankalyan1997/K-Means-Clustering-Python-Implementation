@@ -7,20 +7,19 @@ from collections import defaultdict
 import matplotlib.cm as cm
 from mpl_toolkits.mplot3d import Axes3D
 
-#K means clustering implementation with out using scikit learn or any other library
-#We choose two clusters for simplicity
-#for simplicity purpose lets generate two dimensional input training features say x1,x2 and plot them
+
+Dataset=pd.read_csv('customer_new1.csv')
 m=1000
-x1=np.array(np.random.randint(low=1,high=1000,size=1000))
-x2=np.array(np.random.randint(low=1,high=1000,size=1000))
-x3=np.array(np.random.randint(low=1,high=1000,size=1000))
+x1=Dataset.iloc[:,2:3].values
+x2=Dataset.iloc[:,3:4].values
+x3=Dataset.iloc[:,4:5].values
 X=np.c_[x1,x2,x3]
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.scatter(x1,x2,x3,marker='.',c='black')
-ax.set_xlabel('x1(first input feature)')
-ax.set_ylabel('x2(second input feature)')
-ax.set_zlabel('x3(third input feature)')
+ax.set_xlabel('Age')
+ax.set_ylabel('Income')
+ax.set_zlabel('No of Transactions')
 #ax.set_title('Input dataset for performing clustering')
 plt.show()
 
@@ -58,9 +57,9 @@ ax1 = plt.axes(projection='3d')
 ax1.scatter(x1,x2,x3,marker='.',c='black')
 for i in range(K):
     ax1.scatter(Centroids[:,i][0],Centroids[:,i][1],Centroids[:,i][2],marker='x')
-ax1.set_xlabel('x1(first input feature)')
-ax1.set_ylabel('x2(second input feature)')
-ax1.set_zlabel('x3(third input feature)')
+ax1.set_xlabel('Age')
+ax1.set_ylabel('Income')
+ax1.set_zlabel('No of Transactions')
 #ax.title('Input dataset for performing clustering')
 plt.show()
 
@@ -93,9 +92,9 @@ ax2= plt.axes(projection='3d')
 for k in range(K):
     ax2.scatter(Output[k+1][0,:],Output[k+1][1,:],Output[k+1][2,:],marker='.')
     ax2.scatter(Centroids[:,k][0],Centroids[:,k][1],Centroids[:,k][2],marker='x')
-ax2.set_xlabel('x1(first input feature)')
-ax2.set_ylabel('x2(second input feature)')
-ax2.set_zlabel('x3(third input feature)')
+ax2.set_xlabel('Age')
+ax2.set_ylabel('Income')
+ax2.set_zlabel('No of Transactions')
 plt.show()
 
 
