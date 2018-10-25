@@ -5,6 +5,7 @@ import pandas as pd
 import random as rd
 from collections import defaultdict
 import matplotlib.cm as cm
+from mpl_toolkits.mplot3d import Axes3D
 
 #K means clustering implementation with out using scikit learn or any other library
 #We choose two clusters for simplicity
@@ -12,11 +13,15 @@ import matplotlib.cm as cm
 m=1000
 x1=np.array(np.random.randint(low=1,high=1000,size=1000))
 x2=np.array(np.random.randint(low=1,high=1000,size=1000))
-X=np.c_[x1,x2]
-plt.scatter(x1,x2,marker='.',c='black')
-plt.xlabel('x1(first input feature)')
-plt.ylabel('x2(second input feature)')
-plt.title('Input dataset for performing clustering')
+x3=np.array(np.random.randint(low=1,high=1000,size=1000))
+X=np.c_[x1,x2,x3]
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.scatter(x1,x2,x3,marker='.',c='black')
+ax.set_xlabel('x1(first input feature)')
+ax.set_ylabel('x2(second input feature)')
+ax.set_zlabel('x3(third input feature)')
+#ax.set_title('Input dataset for performing clustering')
 plt.show()
 
 """
@@ -31,13 +36,14 @@ to that cluster on the basis of the computations performed in step 3.a
 """
 #Step 1.initialize number of clusters
 K=3
-Centroids=np.array([]).reshape(2,0)
-i=0
+Centroids=np.array([]).reshape(3,0)
+
 for i in range(K):
     rand=rd.randint(0,m)
     Centroids=np.c_[Centroids,X[rand]]
 
 #Plot the data set with initial centroids
+"""
 i=0
 plt.scatter(x1,x2,marker='.',c='black')
 for i in range(K):
@@ -46,7 +52,17 @@ plt.xlabel('x1(first input feature)')
 plt.ylabel('x2(second input feature)')
 plt.title('Input dataset for performing clustering with initial Centroids')
 plt.show()
+"""
 
+ax1 = plt.axes(projection='3d')
+ax1.scatter(x1,x2,x3,marker='.',c='black')
+for i in range(K):
+    ax1.scatter(Centroids[:,i][0],Centroids[:,i][1],Centroids[:,i][2],marker='x')
+ax1.set_xlabel('x1(first input feature)')
+ax1.set_ylabel('x2(second input feature)')
+ax1.set_zlabel('x3(third input feature)')
+#ax.title('Input dataset for performing clustering')
+plt.show()
 
 
 
@@ -64,7 +80,7 @@ for n in range(num_iter):
     #step 2.b
     Y=defaultdict()
     for k in range(K):
-        Y[k+1]=np.array([]).reshape(2,0)
+        Y[k+1]=np.array([]).reshape(3,0)
     for i in range(m):
         Y[C[i]]=np.c_[Y[C[i]],X[i]]
         
@@ -73,12 +89,13 @@ for n in range(num_iter):
         
     Output=Y
 
+ax2= plt.axes(projection='3d')
 for k in range(K):
-    plt.scatter(Output[k+1][0,:],Output[k+1][1,:],marker='.')
-    plt.scatter(Centroids[:,k][0],Centroids[:,k][1],marker='x')
-plt.xlabel('x1(first input feature)')
-plt.ylabel('x2(second input feature)')
-plt.title('After performing K Means Clustering Algorithm')
+    ax2.scatter(Output[k+1][0,:],Output[k+1][1,:],Output[k+1][2,:],marker='.')
+    ax2.scatter(Centroids[:,k][0],Centroids[:,k][1],Centroids[:,k][2],marker='x')
+ax2.set_xlabel('x1(first input feature)')
+ax2.set_ylabel('x2(second input feature)')
+ax2.set_zlabel('x3(third input feature)')
 plt.show()
 
 
