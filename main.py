@@ -104,6 +104,20 @@ plt.xlabel('Income')
 plt.ylabel('Number of transactions')
 plt.show()
 
+for k in range(K):
+    plt.scatter(Output[k+1][0,:],Output[k+1][1,:],marker='.')
+    plt.scatter(Centroids[:,k][0],Centroids[:,k][1],marker='x')
+plt.xlabel('Age')
+plt.ylabel('Income')
+plt.show()
+
+for k in range(K):
+    plt.scatter(Output[k+1][0,:],Output[k+1][2,:],marker='.')
+    plt.scatter(Centroids[:,k][0],Centroids[:,k][2],marker='x')
+plt.xlabel('Age')
+plt.ylabel('Number of transactions')
+plt.show()
+
 
 
     
